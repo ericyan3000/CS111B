@@ -1,0 +1,5 @@
+1. 3min: Copied directly from the assignment. Compilation success, it works.
+2. 8min: Delete everything, rewrite from scratch. Got incompatible type erro for this line: response = (char)input.nextLine();
+3. 2min: Fix the above error by change 'response' variable to String type. A run time error where the while loop doesn't exit even input 'n' for discontinue.
+4. 4min: Realizing that '!=' operator can't be used to compare String object. Using 'equals' instead.
+5. Program compiles and run successfully.
