@@ -1,0 +1,19 @@
+- initilize anotherGame = 'y'
+- while anotherGame is 'y', excute the loop
+  - random first two cards (int firstCard, secondCard);
+  - calculate total (int total = first + second);
+  - display total;
+  - prompt user for another card or not (char hit);
+  - take player's input for hit (input.next().charAt(0));
+  - while hit is 'y', excute loop;
+    - random card between 1-10 (int nextCard);
+    - update total (total += nextCard);
+    - display total;
+    - if busted, stop the game (total > 21)
+      - display 'Bust';
+      - break the loop;
+    - else 
+      - prompt user for another card or not
+      - take user's input for hit;
+  - prompt the user for another game or not (char anotherGame)
+  - take user's input for anotherGame
