@@ -3,5 +3,6 @@ public class HelloWorld {
       // Prints "Hello, World" in the terminal window.
       float number;
       number = 7.4F;
+      System.out.println(number);
    }
 }

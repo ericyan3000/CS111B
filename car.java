@@ -1,6 +1,6 @@
 public class Car {
   public static void main(String[] args) {
-    Car myCar = new RealCar(2018, "volvo", 0);
+    RealCar myCar = new RealCar(2018, "volvo", 0);
     myCar.accelerate();
     System.out.println(myCar.getSpeed());
     myCar.accelerate();
