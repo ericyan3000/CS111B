@@ -1,9 +1,9 @@
 public class NumberGuesser {
-  private int currentGuess;
-  private int high;
-  private int low;
-  private int highOrigin;
-  private int lowOrigin;
+  protected int currentGuess;
+  protected int high;
+  protected int low;
+  protected int highOrigin;
+  protected int lowOrigin;
 
   public NumberGuesser() {
     this.high = 100;
@@ -22,12 +22,21 @@ public class NumberGuesser {
   }
 
   public void higher() {
-    this.low = currentGuess + 1;
+
+    if (currentGuess == high) {
+      throw new IllegalStateException("Caught you! You can not go higher.");
+    }
+    else
+      this.low = currentGuess + 1;
     //System.out.println("Lower is updated to " + low);
   }
 
   public void lower() {
-    this.high = currentGuess - 1;
+    if (currentGuess == low) {
+      throw new IllegalStateException("Caught you! You can not go lower.");
+    }
+    else
+      this.high = currentGuess - 1;
     //System.out.println("Higher is updated to" + high);
   }
 
@@ -38,11 +47,20 @@ public class NumberGuesser {
     return currentGuess;
   }
 
+  public int getMIN() {
+    return this.lowOrigin;
+  }
+
+  public int getMAX() {
+    return this.highOrigin;
+  }
+
   public void reset() {
     this.high = highOrigin;
     this.low = lowOrigin;
     //System.out.println("I'm reset");
     //this.currentGuess = (high + low) / 2 ;
   }
+
 
 }

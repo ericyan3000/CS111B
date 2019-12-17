@@ -38,10 +38,37 @@ public class Ship {
     }
 
     public boolean isHitAtPoint(Point p) {
-        return deckHit.contains(p);
+        for (int i = 0; i < deckHit.size(); i++) {
+            if (deckHit.get(i).equals(p))
+                return true;
+        }
+        return false;
     }
 
     public int hitCount() {
         return deckHit.size();
+    }
+
+    public int shipSize() {
+        return deck.size();
+    }
+
+    public boolean isOutOfBound(int max_row, int max_col) {
+        //System.out.println("1");
+        for (int i = 0; i < deck.size(); i++) {
+            Point tempPoint = deck.get(i);
+            if (tempPoint.getX() > max_row || tempPoint.getY() > max_col)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isCompatible(ArrayList<Ship> ships) {
+        //System.out.println("2");
+        for (int i = 0; i < ships.size(); i++) {
+            if (this.collidesWith(ships.get(i)))
+                return false;
+        }
+        return true;
     }
 }
