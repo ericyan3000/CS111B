@@ -71,4 +71,8 @@ public class Ship {
         }
         return true;
     }
+
+    public boolean isSunk() {
+        return hitCount() == deck.size();
+    }
 }

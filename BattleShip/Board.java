@@ -1,17 +1,21 @@
+// Enable GOD_MODE in Board.java for easier testing process.
+// Game board dimension is set by MAX_COL and MAX_ROW.
+// Number of ships could be set by MAX_SHIP.
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
   private static int MAX_COL;
   private static int MAX_ROW;
-  private static int MAX_SHIP = 3;
-  private static boolean GOD_MODE = true;
+  private static int MAX_SHIP = 5;
+  private static boolean GOD_MODE = false;
   private ArrayList<Ship> ships = new ArrayList<Ship>(MAX_SHIP);
   private Player playerOne;
 
   public Board() {
-    this.MAX_COL = 20;
-    this.MAX_ROW = 20;
+    this.MAX_COL = 9;
+    this.MAX_ROW = 9;
     System.out.println("GOD_MODE is " + Boolean. toString(GOD_MODE));
 
     // initialize ships arraylist
@@ -48,6 +52,7 @@ public class Board {
   public void displayBoard() {
     // transver each coordinate points
     for (int row = MAX_ROW; row >= 0; row--) {
+      System.out.print(row + " ");
       for (int col = 0; col <= MAX_COL; col++) {
         Point tempPoint = new Point(col, row);
         boolean isDisplayed = false;
@@ -61,39 +66,74 @@ public class Board {
             // if the point in on ship(i)
             if (ships.get(i).containsPoint(tempPoint)) {
               // if sunk
-              if (ships.get(i).hitCount() == ships.get(i).shipSize()) {
-                System.out.print("X ");
+              if (ships.get(i).isSunk()) {
+                System.out.print("S ");
                 isDisplayed = true;
                 break;
               }
               // if just hit
               else if(ships.get(i).isHitAtPoint(tempPoint)) {
-                System.out.print("x ");
+                System.out.print("X ");
                 isDisplayed = true;
                 break;
               }
             }
           }
-          if (!isDisplayed)
+          if (!isDisplayed) {
             System.out.print(". ");
+            isDisplayed = true;
+          }
         }
         // reveal ship if GOD_MODE == true
         else if (GOD_MODE) {
           for (int i = 0; i < ships.size(); i++) {
-            if (ships.get(i).containsPoint(tempPoint))
+            if (ships.get(i).containsPoint(tempPoint)) {
               System.out.print("O ");
+              isDisplayed = true;
+              break;
+            }
           }
         }
-        else  
-        //  if (!isDisplayed)
+        
+        // print ~ for anything else
+        if (!isDisplayed)
           System.out.print("~ ");
       }
       System.out.println("");
     }
+    System.out.print("  ");
+    for (int i = 0; i <= MAX_COL; i++) {
+      System.out.print(i + " ");
+    }
+    System.out.printf("\n\n");
   }
 
   public boolean isAllShipsSunk() {
-    return false;
+    return shipsSunk() == ships.size();
+  }
+
+  public void makeShot(Point p) {
+    for (int i = 0; i < ships.size(); i++) {
+      ships.get(i).shotFiredAtPoint(p);
+    }
+  }
+
+  public int shipsAlive() {
+    int counter = 0;
+    for (int i = 0; i < ships.size(); i++) {
+      if (!ships.get(i).isSunk())
+        counter++;
+    }
+    return counter;
+  }
+
+  public int shipsSunk() {
+    int counter = 0;
+    for (int i = 0; i < ships.size(); i++) {
+      if (ships.get(i).isSunk())
+        counter++;
+    }
+    return counter;
   }
 
   

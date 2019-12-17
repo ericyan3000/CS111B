@@ -21,7 +21,7 @@ public class Player {
     Point entry;
 
     do {
-      System.out.print("Enter a coordinate: ");
+      System.out.print("Move " + (totalMove()+1) + " Enter a coordinate: ");
       int xValue = input.nextInt();
       int yValue = input.nextInt();
       entry = new Point(xValue, yValue);
@@ -60,5 +60,9 @@ public class Player {
       System.out.print(pastGuesses.get(i).toString() + " ");
     }
     System.out.println("");
+  }
+
+  public int totalMove() {
+    return pastGuesses.size();
   }
 }
