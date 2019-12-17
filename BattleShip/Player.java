@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Player {
   private String name;
@@ -18,12 +19,21 @@ public class Player {
   // Getting coordinate from player, validating before return
   public Point makeGuess() {
     Scanner input = new Scanner(System.in);
-    Point entry;
+    Point entry = new Point(-1, -1);
 
     do {
       System.out.print("Move " + (totalMove()+1) + " Enter a coordinate: ");
-      int xValue = input.nextInt();
-      int yValue = input.nextInt();
+      int xValue;
+      int yValue;
+      try {
+        xValue = input.nextInt();
+        yValue = input.nextInt();
+      }
+      catch (InputMismatchException e) {
+        System.out.print("Please enter integer only.\n");
+        input.nextLine();
+        continue;
+      }
       entry = new Point(xValue, yValue);
 
       if (!isValidCoordinate(entry))
@@ -32,7 +42,7 @@ public class Player {
       if (hasPastGuess(entry))
         System.out.println("Coordinate is already tried before.");
 
-    } while (!isValidCoordinate(entry));
+    } while (!isValidCoordinate(entry) || hasPastGuess(entry));
 
     pastGuesses.add(entry);
 
@@ -42,7 +52,7 @@ public class Player {
 
   // check for valid coordinate entry
   public boolean isValidCoordinate(Point p) {
-    return p.getX() <= board.getMaxCol() && p.getY() <= board.getMaxRow() && !hasPastGuess(p);
+    return p.getX() >= 0 && p.getY() >= 0 && p.getX() <= board.getMaxCol() && p.getY() <= board.getMaxRow();
   }
 
   // check if a point in a the guess arraylist

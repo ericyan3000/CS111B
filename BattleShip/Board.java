@@ -6,17 +6,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-  private static int MAX_COL;
-  private static int MAX_ROW;
-  private static int MAX_SHIP = 5;
-  private static boolean GOD_MODE = false;
+  private static int MAX_COL = 9;
+  private static int MAX_ROW = 9;
+  private static int MAX_SHIP = 1;
+  private static boolean GOD_MODE = true;
   private ArrayList<Ship> ships = new ArrayList<Ship>(MAX_SHIP);
   private Player playerOne;
 
   public Board() {
-    this.MAX_COL = 9;
-    this.MAX_ROW = 9;
-    System.out.println("GOD_MODE is " + Boolean. toString(GOD_MODE));
+    //System.out.println("GOD_MODE is " + Boolean. toString(GOD_MODE));
 
     // initialize ships arraylist
     //System.out.println("Inside board constructor.");
@@ -136,5 +134,8 @@ public class Board {
     return counter;
   }
 
+  public void reset() {
+    
+  }
   
 }
