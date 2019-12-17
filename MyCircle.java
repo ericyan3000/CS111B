@@ -20,4 +20,12 @@ public class MyCircle extends GridItem {
 		
 		return distance <= radius;
 	}
+
+	public double getRadius() {
+		return 0;
+	}
+
+	public void setRadius(double r) {
+
+	}
 }
